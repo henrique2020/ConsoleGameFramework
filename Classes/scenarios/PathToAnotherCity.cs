@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleGameFramework.scenarios
+namespace ConsoleGameFramework.Scenarios
 {
     internal class PathToAnotherCity : Scene
     {
@@ -68,8 +68,7 @@ namespace ConsoleGameFramework.scenarios
             }
             else if (playerOption == "2")
             {
-                Florest florest = new Florest();
-                Move(florest);
+                Move(new Florest());
             }
             else if (playerOption == "3")
             {
@@ -78,8 +77,7 @@ namespace ConsoleGameFramework.scenarios
             }
             else if (playerOption == "4")
             {
-                City city = new City();
-                Move(city);
+                Move(new City());
             }
             else if (playerOption == "5")
             {

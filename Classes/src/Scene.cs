@@ -1,16 +1,25 @@
-﻿namespace ConsoleGameFramework.src
+﻿using static System.Net.Mime.MediaTypeNames;
+
+namespace ConsoleGameFramework.src
 {
     internal abstract class Scene
     {
         private World World;
         private int Top;
+        public string UserOptionMessage;
 
         public Scene()
         {
-            World = new World(20, 80);
+            World = new World(25, 80);
             World.Fill();
 
             Top = 1;
+            if (!string.IsNullOrWhiteSpace(Player.Instance.Name))
+            {
+                Add($"{Player.Instance.Name} ({Player.Instance.Life}♥) - ${Player.Instance.Money}");
+            }
+
+            UserOptionMessage = "Qual a sua escolha?";
         }
 
         public void Add(string text)
@@ -20,7 +29,7 @@
 
         public string RequestUserOption()
         {
-            Console.WriteLine("Qual sua escolha?");
+            Console.WriteLine(UserOptionMessage);
             string option = Console.ReadLine();
 
             return option;

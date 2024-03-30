@@ -7,23 +7,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleGameFramework.Scenarios
 {
-    internal class Menu : Scene
+    internal class PlayerCreation : Scene
     {
-        public Menu()
-        {
-            Add("1. Jogar");
-            Add("2. Fechar");
+        public PlayerCreation() {
+            UserOptionMessage = "Por favor digite o nome do Jogador: ";
+            Add("Você está na janela de criação do personagem.");
         }
 
         public override void ProcessOption(string playerOption)
         {
-            if (playerOption == "1")
+            if (string.IsNullOrWhiteSpace(playerOption))
             {
                 Move(new PlayerCreation());
             } else
             {
-                Console.WriteLine("Você escolheu sair");
-                Environment.Exit(0);
+                Player.Instance.Name = playerOption;
+                Move(new City());
             }
         }
     }

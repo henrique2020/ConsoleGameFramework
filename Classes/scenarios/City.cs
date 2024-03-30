@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleGameFramework.scenarios
+namespace ConsoleGameFramework.Scenarios
 {
     internal class City : Scene
     {
         public City()
         {
-            Add("Você está na cidade, ela é fria como o gel.");
+            Add("Você está na cidade, ela é fria como o gelo.");
             Add(@"         /\        ");
             Add(@"        /  \       ");
             Add(@"   /\  /    \  /\");
@@ -27,26 +27,34 @@ namespace ConsoleGameFramework.scenarios
 
             Add("");
             Add("1. Você deseja entrar no castelo?");
-            Add("2. Você deseja ir para a floresta?");
-            Add("3. Você deseja ir para outra cidade?");
+            Add("2. Você deseja entrar na loja?");
+            Add("3. Você deseja entrar no coliseu?");
+            Add("4. Você deseja ir para a floresta?");
+            Add("5. Você deseja ir para outra cidade?");
         }
 
         public override void ProcessOption(string playerOption)
         {
             if (playerOption == "1")
             {
-                Castle castle = new Castle();
-                Move(castle);
+                Move(new Castle());
             }
             else if (playerOption == "2")
             {
-                Florest florest = new Florest();
-                Move(florest);
+                Move(new Shop());
             }
             else if (playerOption == "3")
             {
-                PathToAnotherCity path = new PathToAnotherCity();
-                Move(path);
+                Move(new Coliseum());
+            }
+            
+            else if (playerOption == "4")
+            {
+                Move(new Florest());
+            }
+            else if (playerOption == "5")
+            {
+                Move(new PathToAnotherCity());
             }
             else
             {

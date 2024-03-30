@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleGameFramework.scenarios
+namespace ConsoleGameFramework.Scenarios
 {
     internal class Castle : Scene
     {

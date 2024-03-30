@@ -9,7 +9,6 @@ namespace ConsoleGameFramework.src
 {
     internal class World
     {
-
         public int Lines;
         public int Columns;
 
@@ -52,23 +51,21 @@ namespace ConsoleGameFramework.src
             }
         }
 
-        public int Draw(int line, int column, string phrase)
+        public int Draw(int line, int column, string text)
         {
-            bool exibe = true;
+            bool borda = false;
             int total_lines = 1;
-            phrase = phrase.Replace("\r\n", "\n");
-            phrase = phrase.Replace("\r", "\n");
-            phrase = phrase.Trim('\n').Trim('\t');
-            for (int col = column, pos = 0; pos < phrase.Length; col++, pos++)
+            text = text.Replace("\r\n", "\n");
+            text = text.Replace("\r", "\n");
+            text = text.Trim('\n').Trim('\t');
+            for (int col = column, pos = 0; pos < text.Length; col++, pos++)
             {
-                if ((line == 0 || line >= this.Lines) || (column == 0 || column + phrase.Length - pos >= this.Columns))
+                if ((line == 0 || line+1 >= this.Lines) || (column == 0 || column + text.Length - pos >= this.Columns))
                 {
-                    exibe = false;
-                    this.Fill();
-                    Console.WriteLine("A frase chegou na borda, não foi possível escrever");
+                    borda = true;
                     break;
                 }
-                char symbol = phrase[pos];
+                char symbol = text[pos];
                 if (symbol == '\n')
                 {
                     line++;
@@ -80,7 +77,13 @@ namespace ConsoleGameFramework.src
                 }
             }
 
-            //if (exibe) this.Print();
+            if (borda)
+            {
+                this.Fill();
+                this.Draw(1, column, text);
+                total_lines = -Lines + 1;
+            }
+
             return total_lines;
         }
 

@@ -1,17 +1,8 @@
-﻿using ConsoleGameFramework.scenarios;
+﻿using ConsoleGameFramework;
+using ConsoleGameFramework.Scenarios;
 using ConsoleGameFramework.src;
 using System;
-/*
-Animal animal = new Animal()
-{
-    Nome = "Lobo",
-    Especie = "Canis",
-    Altura = 50.4f,
-    Peso = 30.25f,
-    Idade = 7,
-    Patas = 4
-};
-*/
+
 /*
 World palavra = new World(8, 20);
 palavra.Fill();
@@ -28,5 +19,6 @@ cena.Add("Olá");
 cena.Add(@"Mais um texto
 Aqui");
 */
+
 Menu menu = new Menu();
 menu.Show();
