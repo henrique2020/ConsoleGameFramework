@@ -16,10 +16,16 @@ namespace ConsoleGameFramework.src
             Top = 1;
             if (!string.IsNullOrWhiteSpace(Player.Instance.Name))
             {
-                Add($"{Player.Instance.Name} ({Player.Instance.Life}♥) - ${Player.Instance.Money}");
+                this.PlayerBar();
             }
 
             UserOptionMessage = "Qual a sua escolha?";
+        }
+
+        public void PlayerBar() {
+
+            string text = ($"{Player.Instance.Name} ({Player.Instance.Life:000}♥) - ${Player.Instance.Money}");
+            Top += World.Draw(1, 1, text);
         }
 
         public void Add(string text)

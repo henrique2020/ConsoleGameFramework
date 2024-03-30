@@ -11,13 +11,13 @@ namespace ConsoleGameFramework.Scenarios
     {
         public Fight figth = new Fight();
         public Random rand = new Random();
-        protected int oponents;
-        protected int oponentsWins = 0;
+        protected int opponents;
+        protected int opponentsDefeated = 0;
 
         public Coliseum() {
-            oponents = rand.Next(1, 5);
+            opponents = rand.Next(1, 5);
             NPC.Instance.Life = 100;
-            oponents--;
+            opponents--;
             Add("Você está no coliseu!");
             Add("1. Atacar");
             Add("2. Defender");
@@ -34,12 +34,11 @@ namespace ConsoleGameFramework.Scenarios
                 damage = figth.Attack("player");
                 Console.WriteLine($"{Player.Instance.Name} atacou! Dano causado {damage}");
 
-                if(NPC.Instance.Life <= 0 && oponents > 0)
+                if(NPC.Instance.Life <= 0 && opponents > 0)
                 {
-                    
-                    oponentsWins++;
+                    opponentsDefeated++;
                     Add("");
-                    Add($"Oponente {oponentsWins} vencido. Restam {oponents} openentes");
+                    Add($"Oponente {opponentsDefeated} vencido. Restam {opponents} openentes");
 
                     NPC.Instance.Life = 100;
                     NPC.Instance.RemoveItems();
@@ -75,6 +74,7 @@ namespace ConsoleGameFramework.Scenarios
                 if (rand.Next(1, 10) > 4)
                 {
                     damage = figth.Attack("npc");
+                    PlayerBar();
                     Console.WriteLine($"Oponente atacou! Dano causado {damage}");
 
                     if (Player.Instance.Life <= 0)
