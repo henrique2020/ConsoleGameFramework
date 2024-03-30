@@ -4,48 +4,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace ConsoleGameFramework.Scenarios
 {
     internal class Coliseum : Scene
     {
         public Fight figth = new Fight();
         public Random rand = new Random();
-        protected int oponents;
-        protected int oponentsWins = 0;
+        protected int opponents;
+        protected int opponentsDefeated = 0;
 
-        public Coliseum() {
-            oponents = rand.Next(1, 5);
+        public Coliseum()
+        {
+            opponents = rand.Next(1, 5);
             NPC.Instance.Life = 100;
-            oponents--;
+            opponents--;
             Add("Você está no coliseu!");
             Add("1. Atacar");
             Add("2. Defender");
         }
-
         public override void ProcessOption(string playerOption)
         {
             bool npc = true;
             int damage;
-
             Console.WriteLine();
             if (playerOption == "1")
             {
                 damage = figth.Attack("player");
                 Console.WriteLine($"{Player.Instance.Name} atacou! Dano causado {damage}");
 
-                if(NPC.Instance.Life <= 0 && oponents > 0)
+                if (NPC.Instance.Life <= 0 && opponents > 0)
                 {
-                    
-                    oponentsWins++;
+                    opponentsDefeated++;
                     Add("");
-                    Add($"Oponente {oponentsWins} vencido. Restam {oponents} openentes");
+                    Add($"Oponente {opponentsDefeated} vencido. Restam {opponents} openentes");
 
                     NPC.Instance.Life = 100;
                     NPC.Instance.RemoveItems();
                     NPC.Instance.SortItems();
-
-                } else if (NPC.Instance.Life <= 0)
+                }
+                else if (NPC.Instance.Life <= 0)
                 {
                     Console.WriteLine();
                     Console.WriteLine("+------------------------+");
@@ -55,8 +52,9 @@ namespace ConsoleGameFramework.Scenarios
                     Player.Instance.Money += 100;
                     Move(new City());
                 }
-               
-            } else if (playerOption == "2")
+
+            }
+            else if (playerOption == "2")
             {
                 figth.Defense("player");
                 Console.WriteLine($"{Player.Instance.Name} defendeu!");
@@ -69,12 +67,12 @@ namespace ConsoleGameFramework.Scenarios
             {
                 npc = false;
             }
-
             if (npc)
             {
                 if (rand.Next(1, 10) > 4)
                 {
                     damage = figth.Attack("npc");
+                    PlayerBar();
                     Console.WriteLine($"Oponente atacou! Dano causado {damage}");
 
                     if (Player.Instance.Life <= 0)
@@ -90,7 +88,6 @@ namespace ConsoleGameFramework.Scenarios
                     Console.WriteLine($"Oponente defendeu!");
                 }
             }
-
             Show();
         }
     }
